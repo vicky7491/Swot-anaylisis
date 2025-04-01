@@ -1,0 +1,125 @@
+
+<!-- This is a simple HTML page for a SWOT Analysis Tool. It allows users to input their strengths, weaknesses, opportunities, and threats, and generates a report displaying the entered information. The page is styled with CSS for better presentation. -->
+<!-- The JavaScript function 'generateSWOTReport' collects the input values and dynamically creates a report section on the page. The layout is responsive, making it suitable for various screen sizes. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWOT Analysis Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #2C3E50;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .swot-box {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>SWOT Analysis Tool</h1>
+
+        <div class="form-group">
+            <label for="strengths">Strengths:</label>
+            <textarea id="strengths" placeholder="Enter your strengths here..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="weaknesses">Weaknesses:</label>
+            <textarea id="weaknesses" placeholder="Enter your weaknesses here..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="opportunities">Opportunities:</label>
+            <textarea id="opportunities" placeholder="Enter your opportunities here..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="threats">Threats:</label>
+            <textarea id="threats" placeholder="Enter your threats here..."></textarea>
+        </div>
+
+        <button class="btn" onclick="generateSWOTReport()">Generate SWOT Report</button>
+
+        <div id="swotReport" class="swot-grid"></div>
+    </div>
+
+    <script>
+        function generateSWOTReport() {
+            // Get input values
+            const strengths = document.getElementById('strengths').value;
+            const weaknesses = document.getElementById('weaknesses').value;
+            const opportunities = document.getElementById('opportunities').value;
+            const threats = document.getElementById('threats').value;
+
+            // Prepare the SWOT analysis sections
+            const swotReportDiv = document.getElementById('swotReport');
+            swotReportDiv.innerHTML = ''; // Clear any previous report
+
+            // Create and display the SWOT analysis sections
+            const swotSections = [
+                { title: 'Strengths', content: strengths },
+                { title: 'Weaknesses', content: weaknesses },
+                { title: 'Opportunities', content: opportunities },
+                { title: 'Threats', content: threats }
+            ];
+
+            swotSections.forEach(section => {
+                if (section.content.trim()) {
+                    const div = document.createElement('div');
+                    div.className = 'swot-box';
+                    div.innerHTML = `
+                        <h2>${section.title}</h2>
+                        <p>${section.content}</p>
+                    `;
+                    swotReportDiv.appendChild(div);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
